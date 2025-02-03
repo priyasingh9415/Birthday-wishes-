@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #fbd3e9, #bbf0f3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            width: 350px;
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: boomer 2s infinite alternate ease-in-out;
+        }
+
+        /* Boomer Effect Animation */
+        @keyframes boomer {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        /* Floating Hearts */
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 0, 127, 0.6);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+            animation: float 5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-400px) scale(1.5); opacity: 0; }
+        }
+
+        .heart:nth-child(1) { left: 10%; animation-duration: 4s; }
+        .heart:nth-child(2) { left: 30%; animation-duration: 6s; }
+        .heart:nth-child(3) { left: 70%; animation-duration: 5s; }
+        .heart:nth-child(4) { left: 90%; animation-duration: 7s; }
+
+        /* Floating Balloons */
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background: radial-gradient(circle, rgba(255,192,203,1) 50%, rgba(255,105,180,1) 100%);
+            border-radius: 50%;
+            animation: balloon-float 6s infinite ease-in-out;
+        }
+
+        .balloon:before {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 2px;
+            height: 30px;
+            background: gray;
+        }
+
+        @keyframes balloon-float {
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+        }
+
+        .balloon:nth-child(1) { left: 10%; animation-duration: 5s; }
+        .balloon:nth-child(2) { left: 50%; animation-duration: 7s; }
+        .balloon:nth-child(3) { left: 80%; animation-duration: 6s; }
+
+        .message {
+            color: #ff4081;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #ff85a2;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #ff4f7d;
+        }
+
+        /* Confetti Effect */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: red;
+            opacity: 0.8;
+            border-radius: 50%;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(600px) rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Birthday Music -->
+    <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-birthday.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <!-- Floating Balloons -->
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+
+    <div class="card">
+        <div class="hearts">
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+        </div>
+        <h2 class="message">Happy Birthday in advance cutie 🎀❤️!</h2>
+        
+        <p>You are divine and the cutest that exists 😍❤️!</p>
+
+        <button class="button" onclick="startConfetti()">Celebrate Now</button>
+    </div>
+
+    <script>
+        function startConfetti() {
+            for (let i = 0; i < 100; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                document.body.appendChild(confetti);
+
+                let colors = ["#ff0", "#ff4081", "#ff85a2", "#bbf0f3", "#ff4f7d", "#0f0", "#00f"];
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.top = -10 + "px";
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+    </script>
+
+</body>
+</html>
